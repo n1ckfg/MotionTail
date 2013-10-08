@@ -14,7 +14,11 @@ void setup(){
   frameRate(fps);
   background(0);
   aP1 = new AutoPaint(color(255,100,0,150));
+  aP1.ease = 500;
+  aP1.spread = 10;
   aP2 = new AutoPaint(color(0,70,255,150));
+  aP2.ease = 50;
+  aP2.spread = 100;
   blendMode(ADD);
 }
 

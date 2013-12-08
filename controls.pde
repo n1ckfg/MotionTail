@@ -1,3 +1,14 @@
+void mousePressed(){
+  addPainter();
+}
+
+void keyPressed(){
+  for(int i=0;i<painters.size();i++){
+    AutoPaint aP = (AutoPaint) painters.get(i);
+    aP.yellowTail.clearGestures();
+  }
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /*
 void mousePressed(){

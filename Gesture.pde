@@ -20,6 +20,9 @@ class Gesture {
   public boolean exists;
   private static final float INIT_TH = 14;
   public float   thickness = INIT_TH;
+  public int lifetime = 0;
+  public int alpha = 255;
+  public color fgColor = color(255);
 
   Gesture(int mw, int mh) {
     w = mw;

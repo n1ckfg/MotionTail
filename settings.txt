@@ -1,0 +1,20 @@
+Stage Width
+960
+
+Stage Height
+540
+
+Stage Depth
+1000
+
+Framerate
+30
+
+OSC Receive Port
+7110
+
+Fullscreen
+false
+
+Syphon Local Echo
+false

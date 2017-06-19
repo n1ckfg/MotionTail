@@ -1,3 +1,4 @@
+/*
 void mousePressed(){
   addPainter();
 }
@@ -8,6 +9,7 @@ void keyPressed(){
     aP.yellowTail.clearGestures();
   }
 }
+*/
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /*
@@ -56,5 +58,3 @@ void keyPressed(){
 }
 */
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-

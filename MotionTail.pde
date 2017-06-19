@@ -1,7 +1,6 @@
 // based on "Yellowtail," by Golan Levin. 
 
 import java.awt.Polygon;
-import processing.opengl.*;
 
 int sW = 960;
 int sH = 540;
@@ -20,14 +19,15 @@ boolean testTrigger = false;
 String mode = "MidiViz"; //Leap, MidiViz
 boolean fullScreen = false;
 
-void setup() {
+void setup() {  
+  size(50, 50, P3D);
   Settings settings = new Settings("settings.txt");
   if(fullScreen){
     sW = displayWidth;
     sH = displayHeight;
   }
   sD = int((float(sW)+float(sH))/2.0);
-  size(sW, sH, OPENGL);
+  surface.setSize(sW, sH);
   oscSetup();
   frameRate(fps);
   background(0);
@@ -142,4 +142,3 @@ boolean hitDetect3D(PVector p1, PVector s1, PVector p2, PVector s2) {
     return false;
   }
 }
-

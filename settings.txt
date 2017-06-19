@@ -8,7 +8,13 @@ Stage Depth
 1000
 
 Framerate
-30
+60
+
+Mode (Leap, MidiViz)
+MidiViz
+
+Painters Limit
+10
 
 OSC Receive Port
 7110

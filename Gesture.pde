@@ -31,7 +31,7 @@ class Gesture {
     path = new Vec3f[capacity];
     polygons = new Polygon[capacity];
     crosses  = new int[capacity];
-    for (int i=0;i<capacity;i++){
+    for (int i=0;i<capacity;i++) {
       polygons[i] = new Polygon();
       polygons[i].npoints = 4;
       path[i] = new Vec3f();
@@ -45,19 +45,19 @@ class Gesture {
     jumpDy = 0;
   }
 
-  public synchronized void clear(){
+  public synchronized void clear() {
     nPoints = 0;
     exists = false;
     thickness = INIT_TH;
   }
 
-  public synchronized void clearPolys(){
+  public synchronized void clearPolys() {
     nPolys = 0;
   }
 
-  public synchronized void addPoint(float x, float y){
-    //synchronized (path){
-      if (nPoints >= capacity){
+  public synchronized void addPoint(float x, float y) {
+    //synchronized (path) {
+      if (nPoints >= capacity) {
         // there are all sorts of possible solutions here,
         // but for abject simplicity, I don't do anything.
       } else {
@@ -75,29 +75,29 @@ class Gesture {
 
   }
 
-  private float getPressureFromVelocity(float v){
+  private float getPressureFromVelocity(float v) {
     final float scale = 18f;
     final float minP = 0.02f;
     final float oldP = (nPoints > 0) ? path[nPoints-1].p : 0;
     return  ((minP + Math.max(0, 1.0f - v/scale)) + (damp1*oldP))*dampInv;
   }
 
-  private void setPressures(){
+  private void setPressures() {
     // pressures vary from 0...1
     float pressure;
     Vec3f tmp;
     double t = 0;
 
     double u = 1.0f/(double)(nPoints - 1)*twoPi;
-    for (int i=0; i<nPoints; i++){
+    for (int i=0; i<nPoints; i++) {
       pressure = (float) Math.sqrt((1.0f - Math.cos(t))*0.5f);
       path[i].p = pressure;
       t += u;
     }
   }
 
-  public float distToLast(float ix, float iy){
-    if (nPoints > 0){
+  public float distToLast(float ix, float iy) {
+    if (nPoints > 0) {
       Vec3f v = path[nPoints-1];
       float dx = v.x - ix;
       float dy = v.y - iy;
@@ -107,9 +107,9 @@ class Gesture {
     }
   }
 
-  public void compile(){
+  public void compile() {
     // compute the polygons from the path of Vec3f's
-    if (exists){
+    if (exists) {
       clearPolys();
 
       Vec3f p0, p1, p2;
@@ -156,7 +156,7 @@ class Gesture {
       // handle the middle points
       int i=1;
       Polygon apoly;
-      for (i=1; i<nPathPoints; i++){
+      for (i=1; i<nPathPoints; i++) {
         taper = (float)(Math.pow((lastPolyIndex-i)*npm1finv,tapow));
 
         p0 = path[i-1];
@@ -199,10 +199,10 @@ class Gesture {
 
         // keep a record of where we cross the edge of the screen
         crosses[i] = 0;
-      if ((axi<=LC)||(bxi<=LC)||(cxi<=LC)||(dxi<=LC)){ crosses[i]|=1;}
-      if ((axi>=RC)||(bxi>=RC)||(cxi>=RC)||(dxi>=RC)){ crosses[i]|=2;}
-      if ((ayi<=TC)||(byi<=TC)||(cyi<=TC)||(dyi<=TC)){ crosses[i]|=4;}
-      if ((ayi>=BC)||(byi>=BC)||(cyi>=BC)||(dyi>=BC)){ crosses[i]|=8;}
+      if ((axi<=LC)||(bxi<=LC)||(cxi<=LC)||(dxi<=LC)) { crosses[i]|=1;}
+      if ((axi>=RC)||(bxi>=RC)||(cxi>=RC)||(dxi>=RC)) { crosses[i]|=2;}
+      if ((ayi<=TC)||(byi<=TC)||(cyi<=TC)||(dyi<=TC)) { crosses[i]|=4;}
+      if ((ayi>=BC)||(byi>=BC)||(cyi>=BC)||(dyi>=BC)) { crosses[i]|=8;}
 
         //swap data for next time
         ax = dx; ay = dy;
@@ -228,7 +228,7 @@ class Gesture {
     }
   }
 
-  public synchronized void smooth(){
+  public synchronized void smooth() {
     // average neighboring points
 
     final float weight = 18f;
@@ -236,7 +236,7 @@ class Gesture {
     int nPointsMinusTwo = nPoints - 2;
     Vec3f lower, upper, center;
 
-    for (int i=1; i<nPointsMinusTwo; i++){
+    for (int i=1; i<nPointsMinusTwo; i++) {
       lower = path[i-1];
       center = path[i];
       upper = path[i+1];
@@ -247,4 +247,3 @@ class Gesture {
   }
 
 }
-

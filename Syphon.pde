@@ -1,5 +1,5 @@
 String syphonServerName = "Simple Server";
-PGraphics canvas;
+PGraphics3D canvas;
 boolean localEcho = true;
 
 /*
@@ -19,6 +19,7 @@ void beginSyphon(){
 
 void endSyphon(){
   canvas.endDraw(); //2.  end draw loop
+  filter.bloom.apply(canvas);
   server.sendImage(canvas); //3.  canvas goes to Syphon server
   if(localEcho) image(canvas, 0, 0);  //4.  canvas is displayed in app
 }
@@ -34,7 +35,7 @@ Spout server;
 void initSyphon() {
   server = new Spout(this);
   server.createSender(syphonServerName);
-  canvas = createGraphics(sW,sH,P3D);
+  canvas = (PGraphics3D) createGraphics(sW,sH,P3D);
 }
 
 void beginSyphon() {
@@ -43,6 +44,7 @@ void beginSyphon() {
 
 void endSyphon() {
   canvas.endDraw();
+  filter.bloom.apply(canvas);
   image(canvas, 0, 0);
   server.sendTexture();
 }

@@ -8,44 +8,50 @@ class AutoPaint extends YellowTail{
   float spread = 15;
   YellowTail yellowTail;
 
-  AutoPaint(color _c, PVector _t){
+  AutoPaint(color _c, PVector _t) {
     super(_c);
     yellowTail = new YellowTail(_c);
     init(_t);
   }
 
-  AutoPaint(color _c){
+  AutoPaint(color _c) {
     super(_c);
     yellowTail = new YellowTail(_c);
     init();
   }
 
-  AutoPaint(){
+  AutoPaint(PVector _t) {
+    super();
+    yellowTail = new YellowTail();
+    init(_t);
+  }
+  
+  AutoPaint() {
     super();
     yellowTail = new YellowTail();
     init();
   }
-
-  void init(PVector _t){
+  
+  void init(PVector _t) {
     counter=0;
     t = _t;
     p = _t;
     yellowTail.triggerStart(p.x,p.y);
   }
 
-  void init(){
+  void init() {
     counter=0;
     yellowTail.triggerStart(p.x,p.y);
   }
 
   void update(){
     yellowTail.update();
-    if(counter<counterMax){
+    if (counter<counterMax) {
       p.x = tween(p.x,t.x,ease) + random(spread) - random(spread);
       p.y = tween(p.y,t.y,ease) + random(spread) - random(spread);
       yellowTail.triggerDrag(p.x,p.y);
       counter++;
-    }else{
+    } else {
       yellowTail.triggerEnd();
       //TEMPORARY
       testTrigger = false;
@@ -53,12 +59,12 @@ class AutoPaint extends YellowTail{
     }
   }
 
-  void draw(){
+  void draw() {
     yellowTail.draw();
     //
   }
 
-  void run(){
+  void run() {
     update();
     draw();
   }

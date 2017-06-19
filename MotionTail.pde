@@ -10,7 +10,7 @@ float ease = 10;
 
 OscHand[] hands = new OscHand[2];
 
-ArrayList painters = new ArrayList();
+ArrayList<AutoPaint> painters = new ArrayList<AutoPaint>();
 int paintersLimit = 50;
 color c1 = color(255, 100, 0, 250);
 color c2 = color(0, 70, 255, 250);
@@ -22,7 +22,7 @@ boolean fullScreen = false;
 void setup() {  
   size(50, 50, P3D);
   Settings settings = new Settings("settings.txt");
-  if(fullScreen){
+  if (fullScreen) {
     sW = displayWidth;
     sH = displayHeight;
   }
@@ -37,6 +37,7 @@ void setup() {
   }
   noCursor();
   initSyphon();
+  bloomSetup();
 }
 
 /*
@@ -54,13 +55,13 @@ void draw() {
   }  
 
   println(hands[0].oscFinger[0].t.z);
-  if(mode.equals("Leap")){
-    if(hands[0].oscFinger[0].t.z < 260 && !testTrigger){
+  if (mode.equals("Leap")) {
+    if (hands[0].oscFinger[0].t.z < 260 && !testTrigger) {
       addPainter();
       testTrigger=true;
     }
-  }else{
-    if(m.z < 260 && !testTrigger){
+  } else {
+    if (m.z < 260 && !testTrigger) {
       addPainter();
       testTrigger=true;
     }    
@@ -68,11 +69,11 @@ void draw() {
 
   int countStrokes = 0;
   for (int i=0;i<painters.size();i++) {
-    AutoPaint aP = (AutoPaint) painters.get(i);
-    if(mode.equals("Leap")){
+    AutoPaint aP = painters.get(i);
+    if (mode.equals("Leap")) {
       aP.t.x = hands[0].oscFinger[0].t.x;
       aP.t.y = hands[0].oscFinger[0].t.y;
-    }else{
+    } else {
       aP.t.x = m.x;
       aP.t.y = m.y;
     }
@@ -81,7 +82,7 @@ void draw() {
     countStrokes += aP.yellowTail.gestureArray.length;
   }
   //println("painters: " + painters.size() + "   strokes: " + countStrokes);
-  if(painters.size()>paintersLimit) painters.remove(0);
+  if (painters.size()>paintersLimit) painters.remove(0);
   endSyphon();
 }
 
@@ -89,20 +90,19 @@ void addPainter() {
   color c;
   if (random(1)<0.5) {
     c = c1;
-  }
-  else {
+  } else {
     c = c2;
   }
   AutoPaint aP;
-  if(mode.equals("Leap")){
+  if (mode.equals("Leap")) {
    aP = new AutoPaint(c,new PVector(hands[0].oscFinger[0].t.x,hands[0].oscFinger[0].t.y));
-  }else{
+  } else {
    aP = new AutoPaint(c,new PVector(m.x,m.y));
   }
   aP.ease = random(500);
-  if(mode.equals("Leap")){
+  if (mode.equals("Leap")) {
     aP.spread = random(hands[0].oscFinger[0].t.z);
-  }else{
+  } else {
     aP.spread = random((0.5 * sW) - m.x);
   }
   painters.add(aP);
@@ -137,8 +137,7 @@ boolean hitDetect3D(PVector p1, PVector s1, PVector p2, PVector s2) {
     p1.z - s1.z <= p2.z + s2.z
     ) {
     return true;
-  } 
-  else {
+  } else {
     return false;
   }
 }

@@ -47,8 +47,7 @@ class OscHand {
       if (idHand==0) {
         fill(fillColor0);
         stroke(fillColor0);
-      }
-      else if (idHand==1) {
+      } else if (idHand==1) {
         fill(fillColor1);
         stroke(fillColor1);
       }

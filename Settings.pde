@@ -11,6 +11,8 @@ class Settings {
         if (settings.data[i].equals("Stage Height")) sH = setInt(settings.data[i+1]);
         if (settings.data[i].equals("Stage Depth")) sD = setInt(settings.data[i+1]);
         if (settings.data[i].equals("Framerate")) fps = setInt(settings.data[i+1]);
+        if (settings.data[i].equals("Mode (Leap, MidiViz)")) mode = setString(settings.data[i+1]);
+        if (settings.data[i].equals("Painters Limit")) paintersLimit = setInt(settings.data[i+1]);
         if (settings.data[i].equals("OSC Receive Port")) receivePort = setInt(settings.data[i+1]);
         if (settings.data[i].equals("Fullscreen")) fullScreen = setBoolean(settings.data[i+1]);
         if (settings.data[i].equals("Syphon Local Echo")) localEcho = setBoolean(settings.data[i+1]);
@@ -113,4 +115,3 @@ class Settings {
       return endColor;
   }
 }
-

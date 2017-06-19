@@ -34,8 +34,7 @@ class OscTool {
       }
       if (tracerCount<traces.length-1) {
         tracerCount++;
-      }
-      else {
+      } else {
         tracerCount=0;
       }
     }
@@ -81,4 +80,3 @@ class OscTool {
   }
   
 }
-

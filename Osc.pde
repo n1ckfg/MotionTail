@@ -20,17 +20,17 @@ void oscSetup() {
 }
 
 void oscEvent(OscMessage msg) {
- try{
-   for(int i=0;i<oscChannelNames.length;i++){
+ try {
+   for (int i=0;i<oscChannelNames.length;i++) {
      if (msg.checkAddrPattern("/"+oscChannelNames[i]) && msg.checkTypetag("ifff")) { //a blob
         m.x = 0.1 * msg.get(1).floatValue();
         m.y = 2 * msg.get(2).floatValue();
         m.z = 0.1 * msg.get(3).floatValue();
         println("MidiViz: " + m);
      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     }else if (msg.checkAddrPattern("/"+oscChannelNames[i]) && msg.checkTypetag("siifff")) { //a Leap hand or pointable
+     } else if (msg.checkAddrPattern("/"+oscChannelNames[i]) && msg.checkTypetag("siifff")) { //a Leap hand or pointable
         String temp = ""+msg.get(0);
-        if(temp.equals("hand")){
+        if(temp.equals("hand")) {
           int idHand = msg.get(1).intValue();
           hands[idHand].show = true;
           hands[idHand].idHand = idHand;
@@ -38,7 +38,7 @@ void oscEvent(OscMessage msg) {
           hands[idHand].t.y = sH * msg.get(3).floatValue();
           hands[idHand].t.z = sD * msg.get(4).floatValue();
           println(hands[idHand].idHand + " " + hands[idHand].p);          
-        }else if(temp.equals("finger")){
+        } else if (temp.equals("finger")) {
           int idHand = msg.get(1).intValue();
           int idFinger = msg.get(2).intValue();
           hands[idHand].oscFinger[idFinger].show = true;
@@ -48,7 +48,7 @@ void oscEvent(OscMessage msg) {
           hands[idHand].oscFinger[idFinger].t.y = sH * msg.get(4).floatValue();
           hands[idHand].oscFinger[idFinger].t.z = sD * msg.get(5).floatValue();
           println(hands[idHand].oscFinger[idFinger].idHand + " " + hands[idHand].oscFinger[idFinger].idFinger + " " + hands[idHand].oscFinger[idFinger].p);
-        }else if(temp.equals("tool")) { //a tool
+        } else if (temp.equals("tool")) { //a tool
           int idHand = msg.get(1).intValue();
           int idTool = msg.get(2).intValue();
           hands[idHand].oscTool[idTool].show = true;
@@ -61,5 +61,5 @@ void oscEvent(OscMessage msg) {
         }
       }
     }
- }catch(Exception e){ }
+ } catch (Exception e) { }
 }

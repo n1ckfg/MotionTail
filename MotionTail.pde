@@ -19,13 +19,11 @@ boolean testTrigger = false;
 String mode = "MidiViz"; //Leap, MidiViz
 boolean fullScreen = false;
 
+Settings settings;
+
 void setup() {  
-  size(50, 50, P3D);
-  Settings settings = new Settings("settings.txt");
-  if (fullScreen) {
-    sW = displayWidth;
-    sH = displayHeight;
-  }
+  size(960, 540, P3D);
+  settings = new Settings("settings.txt");
   sD = int((float(sW)+float(sH))/2.0);
   surface.setSize(sW, sH);
   oscSetup();
@@ -36,7 +34,9 @@ void setup() {
     hands[i] = new OscHand();
   }
   noCursor();
-  initSyphon();
+  //initSyphon();
+  canvas = (PGraphics3D) createGraphics(sW,sH,P3D);
+
   bloomSetup();
 }
 
@@ -47,7 +47,8 @@ boolean sketchFullScreen() {
 */
 
 void draw() {
-  beginSyphon();
+  //beginSyphon();
+  canvas.beginDraw();
   canvas.background(0);
 
   for (int i=0;i<hands.length;i++) {
@@ -83,7 +84,12 @@ void draw() {
   }
   //println("painters: " + painters.size() + "   strokes: " + countStrokes);
   if (painters.size()>paintersLimit) painters.remove(0);
-  endSyphon();
+  //endSyphon();
+  canvas.endDraw();
+  
+  filter.bloom.apply(canvas);
+  
+  image(canvas, 0, 0);
 }
 
 void addPainter() {

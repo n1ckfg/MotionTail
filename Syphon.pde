@@ -28,6 +28,7 @@ void endSyphon(){
 // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
 // WIN
+/*
 import spout.*;
 
 Spout server;
@@ -48,3 +49,4 @@ void endSyphon() {
   image(canvas, 0, 0);
   server.sendTexture();
 }
+*/
